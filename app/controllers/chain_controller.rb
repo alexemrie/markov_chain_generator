@@ -3,10 +3,8 @@ class ChainController < ApplicationController
 
   def index
     if params["markov_tweet"]
-      puts "found markov"
       @markov_tweet = params["markov_tweet"]
     else
-      puts "markov empty"
       @markov_tweet = "New tweet will appear here!"
     end
   end

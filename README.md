@@ -1,24 +1,12 @@
-# README
+# Markov Tweet Generator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple rails application for generating tweets from a real Twitter user using a Markov text prediction model. Enter Twitter username into form beginning with "@" (e.g. "@donaldglover"), then click the "Generate Tweet" button.
 
-Things you may want to cover:
+Application requires Twitter credentials to be saved as environment variables inside '.env' file saved in the root of the application.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+YOUR_CONSUMER_KEY=abcdef
+YOUR_CONSUMER_SECRET=ghijkl
+YOUR_ACCESS_TOKEN=mnop
+YOUR_ACCESS_SECRET=qrstv
+```
