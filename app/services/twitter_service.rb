@@ -18,7 +18,7 @@ class TwitterService
     end
     tweet_text_array
 
-  rescue Twitter::Error::NotFound
+  rescue Twitter::Error
     tweet_text_array = ["Error Not Found"]
   end
 
