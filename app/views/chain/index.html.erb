@@ -1,2 +1,11 @@
-<h1>Hello Chain</h1>
-<h2><%= @substring %></h2>
+<h1>Markov Chain - Tweet Generator</h1>
+
+Twitter Username
+<br>
+
+<%= form_tag({:controller=>"chain", :action=>"handle_submit"}, method: :post, remote: true) do %>
+  <%= text_field_tag :username %>
+  <%= submit_tag 'Generate Tweet', name: nil %>
+<% end %>
+
+<h2 class="markov"><%= @markov_tweet %></h2>

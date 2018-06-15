@@ -1,7 +1,33 @@
 class ChainController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :handle_submit
+
   def index
-    text = "In fact, though we may all like to think of ourselves as the next Shakespeare, inspiration alone is not the key to effective essay writing. You see, the conventions of English essays are more formulaic than you might think on the issue at hand but effective introductory paragraphs are so much more than that Finally, designing the last sentence in this way has the added benefit of seamlessly moving the reader to the first paragraph of the body of the paper. In this way we can see that the basic introduction does not need to be much more than three or four sentences in length"
-    @substring = new_tweet(text)
+    if params["markov_tweet"]
+      puts "found markov"
+      @markov_tweet = params["markov_tweet"]
+    else
+      puts "markov empty"
+      @markov_tweet = "New tweet will appear here!"
+    end
+  end
+
+  def handle_submit
+    username = params[:username]
+
+    twitter_service = TwitterService.new()
+    text = twitter_service.text_string(username)
+
+    new_tweet = make_new_tweet(text)
+
+    @markov_tweet = new_tweet
+
+    respond_to do |format|
+      # if the response fomat is html, redirect as usual
+      format.html { redirect_to root_path }
+
+      # if the response format is javascript, do something else...
+      format.js { }
+    end
   end
 
   private
@@ -22,7 +48,7 @@ class ChainController < ApplicationController
     result
   end
 
-  def new_tweet(input_text)
+  def make_new_tweet(input_text)
     curr_ngram = input_text[0,3]
     new_tweet = curr_ngram
     tweet_char_limit = 280
